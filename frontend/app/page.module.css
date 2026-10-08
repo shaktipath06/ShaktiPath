@@ -1,0 +1,299 @@
+/* Home page layout (section bands and grids). Component styling comes from styles/shaktipath.css. */
+
+.section {
+  padding: clamp(32px, 6vw, 64px) clamp(16px, 4vw, 48px);
+}
+.bgWhite {
+  background: var(--white);
+}
+.bgCream {
+  background: var(--cream-50);
+}
+.wrap {
+  max-width: var(--container-max);
+  margin: 0 auto;
+}
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* Display headings (44px serif, weight 400) and section headings (32px, weight 700) */
+.h2 {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-size: 44px;
+  line-height: 1.2;
+  font-weight: 400;
+  letter-spacing: 0;
+  color: var(--brown-900);
+}
+.h2Section {
+  font-size: 32px;
+  line-height: 1.25;
+  font-weight: 700;
+}
+.accent {
+  color: var(--maroon-700);
+}
+.center {
+  text-align: center;
+}
+
+/* Trust strip under the hero */
+.trustStrip {
+  border-bottom: 1px solid var(--gold-300);
+  padding-top: 24px;
+  padding-bottom: 24px;
+}
+.trust {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr));
+  gap: 20px 24px;
+}
+
+/* Why Choose ShaktiPath */
+.why {
+  display: grid;
+  grid-template-columns: minmax(0, 300px) repeat(4, minmax(0, 1fr));
+  gap: 24px;
+}
+.whyIntro {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+}
+.whyLead {
+  margin: 0;
+  font-size: 18px;
+  line-height: 1.5;
+  font-weight: 600;
+  color: var(--brown-900);
+}
+.whyText {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--brown-700);
+}
+
+/* Meet Our Top Tantrics */
+.topTantrics {
+  padding-bottom: 40px;
+}
+.carouselPad {
+  padding: 0 24px;
+}
+
+/* Explore Our Services */
+.servicesSection {
+  padding-top: 24px;
+}
+.services {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 24px;
+}
+
+/* How It Works */
+.how {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+/* Download Our App band */
+.appBand {
+  background: var(--brown-900);
+  color: var(--white);
+  padding-top: 56px;
+  padding-bottom: 56px;
+}
+.app {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 40px;
+  align-items: center;
+}
+.appCopy {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 14px;
+}
+.appTitle {
+  color: var(--white);
+}
+.appTagline {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-size: 20px;
+  line-height: 1.5;
+  color: var(--gold-300);
+}
+.appList {
+  list-style: none;
+  margin: 8px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--cream-50);
+}
+.appList li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.appTick {
+  display: inline-flex;
+  color: var(--gold-500);
+}
+.appStores {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px;
+  margin-top: 10px;
+}
+.qr {
+  display: grid;
+  place-items: center;
+  width: 96px;
+  height: 96px;
+  border-radius: 8px;
+  background: var(--white);
+  color: var(--brown-900);
+  font-size: 12px;
+  line-height: 1.3;
+  text-align: center;
+  padding: 8px;
+}
+.storeLinks {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.store {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 16px;
+  border: 1px solid rgba(250, 247, 242, 0.5);
+  border-radius: 8px;
+  color: var(--white);
+  text-decoration: none;
+  background: rgba(0, 0, 0, 0.35);
+}
+.store:hover {
+  color: var(--white);
+  border-color: var(--gold-500);
+}
+.store span {
+  display: flex;
+  flex-direction: column;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.2;
+}
+.store small {
+  font-size: 12px;
+  font-weight: 400;
+}
+.storeNote {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--gold-300);
+  max-width: 180px;
+}
+.appShowcase {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 28px;
+}
+.appPhones {
+  width: 300px;
+  max-width: 100%;
+  height: auto;
+  border-radius: 16px;
+  box-shadow: var(--elevation-4);
+}
+.appQuote {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-size: 32px;
+  line-height: 1.25;
+  font-weight: 400;
+  letter-spacing: 0;
+  color: var(--white);
+  max-width: 260px;
+}
+.appQuote span {
+  color: var(--gold-500);
+}
+
+/* What Our Users Say */
+.reviews {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+  gap: 24px;
+}
+
+/* Placeholders shown while API-backed sections stream in */
+.skeletonRow {
+  display: flex;
+  gap: 24px;
+  overflow: hidden;
+  padding: 8px 8px 16px;
+}
+.skeletonCard {
+  flex: 0 0 var(--card-width);
+  aspect-ratio: 4 / 5;
+  border-radius: var(--radius-lg);
+  background: var(--tan-100);
+}
+.skeletonTile {
+  aspect-ratio: 1 / 1.08;
+  border-radius: var(--radius-lg);
+  background: var(--tan-100);
+}
+.skeletonReview {
+  min-height: 150px;
+  border-radius: var(--radius-lg);
+  background: var(--tan-100);
+}
+
+@media (max-width: 1024px) {
+  .why {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .whyIntro {
+    grid-column: 1 / -1;
+  }
+  .services {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .app {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 767px) {
+  .why,
+  .services {
+    grid-template-columns: 1fr;
+  }
+  .h2 {
+    font-size: 40px;
+  }
+  .h2Section {
+    font-size: 28px;
+  }
+}

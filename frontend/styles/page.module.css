@@ -1,0 +1,116 @@
+/* Layout primitives shared by the inner pages (Find a Tantric, profile, booking, shop).
+   Component styling comes from styles/shaktipath.css; page grids live in each page's own module. */
+
+.section {
+  padding: clamp(32px, 6vw, 64px) clamp(16px, 4vw, 48px);
+}
+.bgWhite {
+  background: var(--white);
+}
+.bgCream {
+  background: var(--cream-50);
+}
+.wrap {
+  max-width: var(--container-max);
+  margin: 0 auto;
+}
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.panel {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--elevation-2);
+  padding: 24px;
+}
+
+/* Headings: 32px section (h3 in the spec), 24px panel (h4), 20px group (h5) */
+.h3 {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-size: 32px;
+  line-height: 1.25;
+  font-weight: 700;
+  letter-spacing: 0;
+  color: var(--brown-900);
+}
+.h4 {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-size: 24px;
+  line-height: 1.35;
+  font-weight: 700;
+  letter-spacing: 0;
+  color: var(--brown-900);
+}
+.h5 {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-size: 20px;
+  line-height: 1.4;
+  font-weight: 700;
+  letter-spacing: 0;
+  color: var(--brown-900);
+}
+.accent {
+  color: var(--maroon-700);
+}
+.text {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--brown-700);
+}
+.small {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--brown-700);
+}
+
+/* Shown when the API cannot be reached */
+.unavailable {
+  padding: 24px;
+  border-radius: var(--radius-lg);
+  background: var(--tan-100);
+  border: 1px solid var(--gold-300);
+}
+.unavailableTitle {
+  margin: 0 0 6px;
+  font-family: var(--font-serif);
+  font-size: 20px;
+  line-height: 1.4;
+  font-weight: 700;
+  color: var(--brown-900);
+}
+
+/* Empty results */
+.empty {
+  padding: 40px 24px;
+  text-align: center;
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--gold-300);
+}
+
+/* Placeholders while API-backed sections stream in */
+.skeleton {
+  border-radius: var(--radius-lg);
+  background: var(--tan-100);
+}
+.skeletonLine {
+  height: 16px;
+  border-radius: var(--radius-xs);
+  background: var(--tan-100);
+}
+
+@media (max-width: 767px) {
+  .h3 {
+    font-size: 28px;
+  }
+  .h4 {
+    font-size: 22px;
+  }
+}

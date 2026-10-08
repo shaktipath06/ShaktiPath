@@ -1,0 +1,19 @@
+{
+  "name": "shaktipath",
+  "version": "0.1.0",
+  "private": true,
+  "description": "ShaktiPath by TantraTalk: Next.js frontend (frontend/) and Express + MySQL API (backend/)",
+  "scripts": {
+    "install:all": "npm install && npm --prefix backend install && npm --prefix frontend install",
+    "dev": "concurrently -n api,web -c cyan,magenta \"npm:dev:backend\" \"npm:dev:frontend\"",
+    "dev:backend": "npm --prefix backend run dev",
+    "dev:frontend": "npm --prefix frontend run dev",
+    "db:setup": "npm --prefix backend run db:setup",
+    "build": "npm --prefix frontend run build",
+    "start": "concurrently -n api,web -c cyan,magenta \"npm --prefix backend start\" \"npm --prefix frontend start\"",
+    "lint": "npm --prefix frontend run lint"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.0"
+  }
+}

@@ -1,0 +1,23 @@
+# Dependencies
+node_modules/
+
+# Environment files (keep the examples)
+.env
+.env.*
+!.env.example
+
+# Next.js build output
+frontend/.next/
+frontend/out/
+frontend/next-env.d.ts
+frontend/*.tsbuildinfo
+
+# Logs and OS files
+*.log
+npm-debug.log*
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/

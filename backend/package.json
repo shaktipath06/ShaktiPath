@@ -1,0 +1,29 @@
+{
+  "name": "shaktipath-backend",
+  "version": "0.1.0",
+  "description": "ShaktiPath by TantraTalk: Express + MySQL API",
+  "main": "src/server.js",
+  "scripts": {
+    "dev": "node --watch src/server.js",
+    "start": "node src/server.js",
+    "db:setup": "node scripts/db-setup.js",
+    "db:schema": "node scripts/db-setup.js --schema-only",
+    "db:seed": "node scripts/db-setup.js --seed-only"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "UNLICENSED",
+  "type": "module",
+  "private": true,
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "cors": "^2.8.6",
+    "dotenv": "^18.0.5",
+    "express": "^5.2.1",
+    "helmet": "^8.3.0",
+    "morgan": "^1.12.1",
+    "mysql2": "^3.24.5"
+  }
+}

@@ -1,0 +1,314 @@
+/* Book Your Session (canvas page "4. Book Your Session") and the confirmation page. */
+
+.section {
+  padding-top: 28px;
+  padding-bottom: 48px;
+}
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.stepperBox {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--elevation-2);
+  padding: 24px 16px;
+}
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 348px) minmax(0, 1fr) minmax(0, 368px);
+  grid-template-areas:
+    'card form summary'
+    'info form summary';
+  gap: 20px 24px;
+  align-items: start;
+}
+.card {
+  grid-area: card;
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--elevation-2);
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.info {
+  grid-area: info;
+}
+.form {
+  grid-area: form;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--elevation-2);
+  padding: 24px;
+}
+.summary {
+  grid-area: summary;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Practitioner card */
+.photo {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  border-radius: 10px;
+  overflow: hidden;
+  background: var(--brown-900);
+}
+.photo img {
+  object-fit: cover;
+  object-position: 50% 25%;
+}
+.name {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-size: 24px;
+  line-height: 1.35;
+  font-weight: 700;
+  letter-spacing: 0;
+  color: var(--brown-900);
+}
+.verified {
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 4px;
+  color: var(--success-700);
+}
+.spec {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--brown-700);
+}
+.location {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  line-height: 1.5;
+}
+.pin {
+  display: inline-flex;
+  color: var(--maroon-700);
+}
+.stats {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  padding: 8px 0;
+}
+.service {
+  border-top: 1px solid var(--grey-200);
+  padding-top: 14px;
+  display: flex;
+  gap: 12px;
+}
+.serviceImg {
+  position: relative;
+  width: 76px;
+  height: 76px;
+  flex: none;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: var(--tan-100);
+}
+.serviceImg img {
+  object-fit: cover;
+}
+.serviceText {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.serviceTitle {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.5;
+  font-weight: 600;
+  color: var(--brown-900);
+}
+.serviceDesc {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--brown-700);
+}
+.serviceMeta {
+  margin: 2px 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--brown-700);
+}
+.serviceMeta span {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.servicePrice {
+  margin: 4px 0 0;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+}
+.servicePrice strong {
+  font-size: 20px;
+  font-variant-numeric: tabular-nums;
+}
+.servicePrice a {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* Form column */
+.h4 {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-size: 24px;
+  line-height: 1.35;
+  font-weight: 700;
+  letter-spacing: 0;
+  color: var(--maroon-700);
+}
+.h4Gap {
+  margin-top: 8px;
+}
+.error {
+  margin: 0;
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+  padding: 12px 16px;
+  border-radius: var(--radius-md);
+  background: var(--rose-50);
+  border: 1px solid var(--error-500);
+  color: var(--error-500);
+  font-size: 14px;
+  line-height: 1.5;
+}
+.error .sp-icon {
+  flex: none;
+  margin-top: 2px;
+}
+.fine {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--brown-700);
+}
+.couponMsg {
+  margin: -8px 0 14px;
+  font-size: 13px;
+  line-height: 1.5;
+}
+.couponOk {
+  color: var(--success-700);
+}
+.couponErr {
+  color: var(--error-500);
+}
+
+/* Our Promise and after-booking steps */
+.h3 {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-size: 32px;
+  line-height: 1.25;
+  font-weight: 700;
+  letter-spacing: 0;
+  color: var(--maroon-700);
+}
+.promise {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+  background: var(--cream-50);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+}
+.after {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+/* Choose a practitioner (no tantric in the URL) */
+.chooseGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(240px, 100%), 1fr));
+  gap: 24px;
+}
+.notice {
+  margin: 0;
+  padding: 12px 16px;
+  border-radius: var(--radius-md);
+  background: var(--tan-100);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* Confirmation page */
+.confirmLayout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 24px;
+  align-items: start;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.phoneHide {
+  display: block;
+}
+
+@media (max-width: 1024px) {
+  .layout {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    grid-template-areas:
+      'card form'
+      'info form'
+      'summary summary';
+  }
+  .promise {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 767px) {
+  .phoneHide {
+    display: none;
+  }
+  .layout {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      'card'
+      'form'
+      'summary'
+      'info';
+  }
+  .promise {
+    grid-template-columns: 1fr;
+  }
+  .confirmLayout {
+    grid-template-columns: 1fr;
+  }
+  .h3 {
+    font-size: 28px;
+  }
+}

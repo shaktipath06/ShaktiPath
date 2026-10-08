@@ -1,0 +1,5 @@
+Additional Task for tantrik page: 
+-> Add a admin secion in the home page
+-> Login and register page for both the customer and the tantriks
+-> Customer and tantrik profile page 
+-> Adming page

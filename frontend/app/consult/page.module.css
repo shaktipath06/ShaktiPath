@@ -1,0 +1,164 @@
+/* Find a Tantric: results column with the filter sidebar (canvas page "2. Find a Tantric"). */
+
+.section {
+  padding-top: 32px;
+}
+.layout {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 24px;
+}
+.aside {
+  order: -1;
+  flex: 1 1 240px;
+  max-width: 264px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--elevation-2);
+  padding: 20px;
+}
+.results {
+  flex: 999 1 640px;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.searchBox {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--elevation-2);
+  padding: 12px;
+}
+.filterbar {
+  display: none;
+}
+.head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.count {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-size: 20px;
+  line-height: 1.4;
+  font-weight: 700;
+  letter-spacing: 0;
+  color: var(--brown-900);
+}
+.context {
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--brown-700);
+}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+}
+.asideHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+.asideTitle {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-serif);
+  font-size: 20px;
+  line-height: 1.4;
+  font-weight: 700;
+  letter-spacing: 0;
+  color: var(--brown-900);
+}
+.group {
+  border-top: 1px solid var(--grey-200);
+  padding-top: 16px;
+}
+.groupTitle {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-size: 16px;
+  line-height: 1.5;
+  font-weight: 700;
+  letter-spacing: 0;
+  color: var(--brown-900);
+}
+.groupTitle span {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  color: var(--brown-700);
+}
+.more {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 8px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--maroon-700);
+  font: 600 14px/1.5 var(--font-sans);
+  cursor: pointer;
+}
+.more:hover {
+  color: var(--maroon-500);
+  text-decoration: underline;
+}
+.ratingLabel {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.skelCard {
+  aspect-ratio: 4 / 5;
+  border-radius: var(--radius-lg);
+  background: var(--tan-100);
+}
+
+@media (max-width: 1024px) {
+  .aside {
+    max-width: none;
+    flex-basis: 100%;
+  }
+  .grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 767px) {
+  .aside {
+    display: none;
+    order: 2;
+  }
+  .asideOpen {
+    display: flex;
+  }
+  .filterbar {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+  }
+  .results {
+    order: 1;
+  }
+  .grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 24px;
+  }
+}

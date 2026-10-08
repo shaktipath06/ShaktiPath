@@ -1,0 +1,79 @@
+/* Client-side pieces of the profile page: booking panel, reviews carousel, share and save. */
+
+.panel {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--elevation-3);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.title {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-size: 24px;
+  line-height: 1.35;
+  font-weight: 700;
+  letter-spacing: 0;
+  color: var(--brown-900);
+}
+.step {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.stepLabel {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.5;
+  font-weight: 600;
+  color: var(--brown-900);
+}
+.hint {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--brown-700);
+}
+.error {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--error-500);
+}
+
+.reviewBox {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  border: 1px solid var(--gold-300);
+  border-radius: var(--radius-lg);
+  background: var(--cream-50);
+}
+.reviewBox > figure {
+  flex: 1;
+  min-width: 0;
+}
+.reviewEmpty {
+  margin: 0;
+  padding: 16px;
+  border: 1px solid var(--gold-300);
+  border-radius: var(--radius-lg);
+  background: var(--cream-50);
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--brown-700);
+}
+
+.actions {
+  display: flex;
+  gap: 24px;
+}
+.toast {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--brown-700);
+}

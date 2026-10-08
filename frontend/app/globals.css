@@ -1,0 +1,44 @@
+/* Base styles. Design tokens and component classes come from styles/shaktipath.css. */
+
+html {
+  color-scheme: light;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--brown-900);
+  color: var(--brown-900);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+a {
+  color: var(--maroon-700);
+}
+a:hover {
+  color: var(--maroon-500);
+}
+
+main {
+  background: var(--cream-50);
+}
+
+img,
+svg {
+  vertical-align: middle;
+}
+
+:focus-visible {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  box-shadow: var(--focus-ring);
+}
