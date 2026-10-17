@@ -3,3 +3,9 @@ node_modules/
 .env.*
 !.env.example
 npm-debug.log*
+
+# Vercel CLI project link
+.vercel
+
+# Database CA certificate downloaded from the provider (set DB_SSL_CA to its path)
+*.pem

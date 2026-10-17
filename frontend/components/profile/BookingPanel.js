@@ -11,19 +11,22 @@ import styles from './profile.module.css';
 
 /**
  * "Book Your Session" sidebar on the profile: pick a service, a date (time slots load for it) and a time,
- * then continue to /book with the choice in the URL.
+ * then continue to /book with the choice in the URL. `dateNotice` explains why the panel opened on a later
+ * day than the practitioner's next open one (see lib/availability.js); it clears once another date is picked.
  */
-export default function BookingPanel({ slug, services, initialDate, initialSlots, today, title, proceedLabel }) {
+export default function BookingPanel({ slug, services, initialDate, initialSlots, dateNotice, today, title, proceedLabel }) {
   const [serviceId, setServiceId] = useState(services[0] ? String(services[0].id) : '');
   const [date, setDate] = useState(initialDate);
   const [slots, setSlots] = useState(initialSlots || []);
   const [time, setTime] = useState(null);
+  const [notice, setNotice] = useState(dateNotice || null);
   const [error, setError] = useState(null);
   const [pending, startTransition] = useTransition();
 
   const changeDate = (iso) => {
     setDate(iso);
     setTime(null);
+    setNotice(null);
     setError(null);
     startTransition(async () => {
       const result = await fetchSlots(slug, iso);
@@ -59,6 +62,11 @@ export default function BookingPanel({ slug, services, initialDate, initialSlots
       <div className={styles.step}>
         <p className={styles.stepLabel}>3. Select Time</p>
         <TimeSlots slots={slots} value={time} onChange={(t) => setTime(t)} loading={pending} />
+        {notice ? (
+          <p className={styles.hint} role="status">
+            {notice}
+          </p>
+        ) : null}
         {error ? <p className={styles.error}>{error}</p> : null}
       </div>
       <Button fullWidth arrow href={href} disabled={!services.length}>

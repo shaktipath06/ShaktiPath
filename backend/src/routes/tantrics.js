@@ -101,7 +101,12 @@ router.get('/:slug', async (req, res) => {
         availableFrom,
       });
     },
-    () => sample.tantrics.find((t) => t.slug === slug) || null,
+    () => {
+      // The sample content only has card-level fields (no services, photos or reviews), so a profile built from
+      // it would be incomplete and crash the page. Report the database outage instead; the site then shows its
+      // "unavailable" notice for the profile and booking pages while the list and home pages keep working.
+      throw new HttpError(503, 'Database unavailable');
+    },
   );
   if (!data) throw new HttpError(404, 'Tantric not found');
   res.json(data);

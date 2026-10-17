@@ -57,7 +57,8 @@ website calls this endpoint from a Server Action, never from the browser.
 
 | Path | What |
 | --- | --- |
-| `src/server.js` | Starts the HTTP server |
+| `src/server.js` | Starts the HTTP server (`npm start`, Render, a VPS) |
+| `app.js` | Vercel entrypoint: exports the same Express app for Vercel's zero-config Express builder |
 | `src/app.js` | Express app: security headers, CORS, logging, routes, error handling |
 | `src/config.js` | Environment variables (also accepts `DATABASE_URL`) |
 | `src/db.js` | MySQL connection pool (session time zone pinned to IST) |

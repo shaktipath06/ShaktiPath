@@ -141,9 +141,13 @@ card and Areas of Expertise (each links to the matching filter). An unknown slug
 Reads `GET /api/tantrics/:slug` and `/api/tantrics/:slug/slots`.
 
 **Book Your Session (`/book`)**: `tantric` is required; without it the page offers the featured
-practitioners. Steps: 1 Select Date, 2 Select Time (slots reload when the date changes; past and booked
-slots stay visible but cannot be chosen), 3 Add Your Details (name, e-mail, mobile, purpose, consent
-checkboxes), the Booking Summary with Apply Coupon (`GET /api/coupons/:code`), 4 Payment Method, Pay Now.
+practitioners. The page (and the profile's booking panel) opens on the first day with an open time:
+when the requested or default day has none left (all passed or booked) `frontend/lib/availability.js`
+moves forward up to two weeks and a notice explains the move. Steps: 1 Select Date, 2 Select Time (slots
+reload when the date changes; past and booked slots stay visible but cannot be chosen, and a line says so
+when none can be), 3 Add Your Details (name, e-mail, mobile, purpose, consent
+checkboxes), the Booking Summary with Apply Coupon (`GET /api/coupons/:code`), 4 Payment Method, Pay Now
+(enabled once a time is chosen; a hint under it says so until then).
 Submitting runs the `submitBooking` Server Action, which calls `POST /api/bookings` and redirects to
 `/book/confirmation/<ref>`; a slot taken in the meantime (`409`) reloads the times with a message. The
 confirmation page shows the Booking Received card (reference, date, time, amount due, Add to Calendar as
@@ -270,7 +274,7 @@ Prices and limits change; these were checked in October 2026, verify on the prov
 | Option | Cost | Good to know |
 | --- | --- | --- |
 | **TiDB Cloud Starter** (MySQL-compatible, serverless) | Free monthly quota per organisation; pay only beyond it | Up to five free clusters per organisation. Works with this project's schema. TLS is required: set `DB_SSL=true`. Gives you a host, port 4000, user and password. [Cluster tiers](https://docs.pingcap.com/tidbcloud/select-cluster-tier) |
-| **Aiven for MySQL, free plan** (real MySQL 8) | Free, no time limit | One free service per type per organisation: 1 CPU, 1 GB RAM, 1 GB disk, backups included. Unused services may be powered off after a notice. TLS required (`DB_SSL=true`). [Free tier docs](https://aiven.io/docs/products/mysql/concepts/mysql-free-tier), [free plan limits](https://aiven.io/docs/platform/concepts/free-plan) |
+| **Aiven for MySQL, free plan** (real MySQL 8) | Free, no time limit | One free service per type per organisation: 1 CPU, 1 GB RAM, 1 GB disk, backups included. Unused services may be powered off after a notice. TLS required (`DB_SSL=true`), and the certificate is signed by Aiven's own CA, so also set `DB_SSL_CA` to the `ca.pem` downloaded from the service's Overview page. The service has its own port (not 3306), user `avnadmin`, database `defaultdb`. [Free tier docs](https://aiven.io/docs/products/mysql/concepts/mysql-free-tier), [free plan limits](https://aiven.io/docs/platform/concepts/free-plan) |
 | **Railway MySQL** | New accounts get a one-time $5 trial credit for 30 days; the Hobby plan is $5/month and includes $5 of usage | One-click MySQL service, no sleep. Best if the API is also on Railway. [Pricing overview](https://thesoftwarescout.com/railway-pricing-2026-plans-costs-is-it-worth-it/) |
 | **Your own small VPS** (Node + MySQL on one server) | A few dollars a month | Most control, most maintenance: you install MySQL, Node, Nginx and backups yourself. |
 
@@ -325,6 +329,35 @@ client is ready to spend a little each month, or move everything onto one small 
 Point the domain at the website host (each provider shows the DNS records to add). Render, Vercel and
 Netlify issue HTTPS certificates automatically. Put the API on a subdomain such as `api.<domain>` and
 update `API_URL` and `CORS_ORIGIN` to the final URLs.
+
+### 6.5 The client preview on Vercel (set up 17 October 2026)
+
+Two Vercel projects, both deployed with the Vercel CLI from their own folder (nothing is deployed from the
+repository root, so the `Documetns of Tantrik/` folder never leaves this computer):
+
+| Project | Folder | URL | Notes |
+| --- | --- | --- | --- |
+| `shaktipath-api` | `backend/` | https://shaktipath-api.vercel.app | Vercel's zero-config Express builder runs `backend/app.js` as one function |
+| `shaktipath` | `frontend/` | https://shaktipath-web.vercel.app (also answers at shaktipath-umber.vercel.app) | Next.js, `API_URL` points at the project above |
+
+Environment variables set on Vercel: the API has `DATABASE_URL` (the Aiven Service URI), `DB_SSL=true`,
+`DB_SSL_CA` (the PEM text of Aiven's `ca.pem`), `USE_SAMPLE_FALLBACK=false` and `CORS_ORIGIN=<site URL>`;
+the website has `API_URL=<api URL>` and `NEXT_PUBLIC_SITE_URL=<site URL>`. Both run in the Mumbai region
+(`regions` in each `vercel.json`).
+
+**Database:** an Aiven for MySQL free service (`mysql-shaktipath`, MySQL 8.4, TLS, database `defaultdb`,
+user `avnadmin`) in the user's Aiven project, loaded on 17 October 2026 with `npm run db:setup`. Aiven runs
+MySQL in ANSI mode (`sql_require_primary_key=ON`, `ANSI_QUOTES`), which this schema and the API's queries
+already satisfy. The free service may be powered off by Aiven after a period without traffic; if
+`/api/health` reports `"db": "unavailable"`, power it on again in the Aiven console. To load it again from this
+computer: put the Service URI in `backend/.env` as `DATABASE_URL`, set `DB_SSL_CA=./ca.pem` (download the CA
+from the service's Overview page; `*.pem` is git-ignored), and run `npm run db:setup` in `backend/`. Keep
+the local MySQL in `backend/.env` for everyday development.
+
+To publish a change: `vercel --prod` inside `backend/` or `frontend/` (first `vercel login`, then
+`vercel link` picks the existing project). `vercel env ls` shows the variables, `vercel logs <url>` the
+function logs. Vercel's Hobby plan is for non-commercial use; move the projects to a Pro team (or to the
+hosts in 6.2 and 6.3) before the site goes live for real customers.
 
 ## 7. Everyday commands
 

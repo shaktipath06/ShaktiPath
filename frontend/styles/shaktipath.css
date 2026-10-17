@@ -633,6 +633,22 @@ a.sp-pager__btn { text-decoration: none; }
 .sp-hero__sub { margin: 0 0 var(--space-xs); max-width: 560px; font-size: 22px; line-height: 1.5; color: var(--cream-50); text-wrap: balance; }
 .sp-hero--banner .sp-hero__sub { font-size: 18px; max-width: 760px; }
 .sp-hero .sp-hero__cta { border-color: var(--gold-500); }
+/* Home hero CTA arrival cue: a gold pulse ring with a soft scale beat, alternating with a light sweep, starts a
+   second after the page opens and repeats (--sp-cta-cycles; set a number to stop after that many). It rests while
+   the button is hovered, focused or pressed so the normal hover state takes over; reduced motion disables it. */
+.sp-hero--home .sp-hero__cta { --sp-cta-cycles: infinite; position: relative; overflow: hidden;
+  animation: sp-cta-pulse 2.6s var(--ease-standard) 1s var(--sp-cta-cycles); }
+.sp-hero--home .sp-hero__cta::after { content: ""; position: absolute; top: -4px; bottom: -4px; left: 0; width: 55%; pointer-events: none;
+  background: linear-gradient(105deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.22) 40%, rgba(232, 213, 183, 0.5) 52%, rgba(255, 255, 255, 0) 100%);
+  transform: translateX(-200%) skewX(-18deg); animation: sp-cta-shine 2.6s var(--ease-standard) 2.3s var(--sp-cta-cycles); }
+.sp-hero--home .sp-hero__cta:hover, .sp-hero--home .sp-hero__cta:focus-visible, .sp-hero--home .sp-hero__cta:active,
+.sp-hero--home .sp-hero__cta:hover::after, .sp-hero--home .sp-hero__cta:focus-visible::after, .sp-hero--home .sp-hero__cta:active::after { animation: none; }
+@keyframes sp-cta-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0); transform: none; }
+  10% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.7); transform: scale(1.025); }
+  50% { box-shadow: 0 0 0 16px rgba(212, 175, 55, 0); transform: none; }
+}
+@keyframes sp-cta-shine { 0% { transform: translateX(-200%) skewX(-18deg); } 40%, 100% { transform: translateX(320%) skewX(-18deg); } }
 .sp-hero__aside { text-align: right; max-width: 320px; }
 .sp-hero__mantra { margin: 0 0 var(--space-xs); font: 400 24px/1.5 var(--font-deva); color: var(--gold-500); }
 .sp-hero__asidequote { margin: 0; font: italic 400 20px/1.5 var(--font-serif); color: var(--cream-50); }
@@ -693,12 +709,14 @@ a.sp-pager__btn { text-decoration: none; }
 @media (prefers-reduced-motion: reduce) {
   .sp, .sp * { transition: none !important; animation: none !important; }
   .sp-btn:hover, .sp-tcard:hover, .sp-pcard:hover, .sp-ccard:hover, .sp-feature:hover, .sp-stile:hover, .sp-ibtn:hover { transform: none !important; }
+  .sp-hero--home .sp-hero__cta::after { display: none; }
 }
 @media (forced-colors: active) {
   .sp :focus-visible, .sp:focus-visible { outline: 2px solid Highlight; outline-offset: 2px; }
   .sp-check__box, .sp-radio__dot { appearance: auto; -webkit-appearance: auto; }
   .is-selected, .is-current, .is-on, .is-active, .sp-pay__opt.is-on { forced-color-adjust: none; background: Highlight !important; color: HighlightText !important; border-color: Highlight !important; }
   .sp-btn, .sp-ibtn, .sp-chip, .sp-slots__slot, .sp-pager__btn { border: 1px solid ButtonText; }
+  .sp-hero--home .sp-hero__cta::after { display: none; }
 }
 
 /* ---------- next/image compatibility (the components render photos through next/image) ---------- */

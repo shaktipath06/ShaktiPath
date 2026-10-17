@@ -22,7 +22,8 @@ import TantricCard from '@/components/ui/TantricCard';
 import TrustItem from '@/components/ui/TrustItem';
 import { cx, inr } from '@/components/ui/utils';
 import { PROFILE } from '@/content/profile';
-import { getSlots, getTantric, isNotFound, isUnavailable } from '@/lib/api';
+import { getTantric, isNotFound, isUnavailable } from '@/lib/api';
+import { resolveBookingDay } from '@/lib/availability';
 import {
   durationLabel,
   languagesLabel,
@@ -85,13 +86,8 @@ async function Profile({ params }) {
   // Today's date, the slots and the "2 weeks ago" labels depend on the clock: request-time only.
   await io();
   const today = todayIst();
-  const date = t.availableFrom && t.availableFrom >= today ? t.availableFrom : today;
-  let slots = [];
-  try {
-    ({ slots } = await getSlots(t.slug, date));
-  } catch {
-    slots = [];
-  }
+  // The booking panel opens on the first day with an open time (lib/availability.js explains any move).
+  const { date, slots, notice } = await resolveBookingDay({ slug: t.slug, availableFrom: t.availableFrom, today });
   const reviews = (t.reviews || []).map((r) => ({ ...r, dateLabel: relativeDate(r.date) }));
   const reviewLabel = reviewCountLabel(t.reviewCount);
   const languages = t.languages || [];
@@ -220,6 +216,7 @@ async function Profile({ params }) {
               services={t.services}
               initialDate={date}
               initialSlots={slots}
+              dateNotice={notice}
               today={today}
               title={PROFILE.bookPanelTitle}
               proceedLabel={PROFILE.proceedLabel}

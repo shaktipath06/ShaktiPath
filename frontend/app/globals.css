@@ -24,7 +24,9 @@ body {
 a {
   color: var(--maroon-700);
 }
-a:hover {
+/* :where() keeps this at element specificity, so component classes that set their own colour
+   (buttons, icon buttons, cards, header links) are never overridden while hovered or pressed. */
+a:where(:hover) {
   color: var(--maroon-500);
 }
 

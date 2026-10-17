@@ -12,6 +12,9 @@ const nextConfig = {
     // CDN, list the host here so next/image can optimise them, for example:
     // remotePatterns: [{ protocol: 'https', hostname: 'cdn.shaktipath.in' }],
     remotePatterns: [],
+    // 75 is the default for photos; the logo lockups (components/ui/Logo.js) ask for 100 so their edges stay
+    // crisp when the browser zooms in.
+    qualities: [75, 100],
   },
 };
 

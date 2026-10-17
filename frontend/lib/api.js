@@ -58,7 +58,13 @@ async function request(path, init) {
   }
   const body = await res.json().catch(() => null);
   if (!res.ok) {
-    throw new ApiError(res.status, (body && body.error) || `${path} responded ${res.status}`, body && body.details);
+    // Only the API itself answers with a JSON { error } body. A non-JSON error (the hosting platform's own 404 or
+    // 5xx page during a deployment or an outage) means the API was not really reached: report it as unavailable,
+    // so the pages show their notice and the short failure cache applies instead of a cached "not found".
+    if (!body || typeof body.error !== 'string') {
+      throw new ApiError(503, `${path} responded ${res.status} without an API error body`);
+    }
+    throw new ApiError(res.status, body.error, body.details);
   }
   return body;
 }

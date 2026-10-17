@@ -41,6 +41,7 @@ export default function BookingForm({
   infoItems,
   stats,
   couponCode,
+  dateNotice,
 }) {
   const [date, setDate] = useState(initialDate);
   const [slots, setSlots] = useState(initialSlots || []);
@@ -49,6 +50,8 @@ export default function BookingForm({
   const [slotsPending, startSlots] = useTransition();
   const [coupon, setCoupon] = useState(null);
   const [method, setMethod] = useState('upi');
+  // Why the page opened on a different day than asked for (or why the preselected time was dropped).
+  const [notice, setNotice] = useState(dateNotice || null);
 
   const loadSlots = (iso) => {
     startSlots(async () => {
@@ -61,6 +64,7 @@ export default function BookingForm({
     setDate(iso);
     setTime(null);
     setSlotError(null);
+    setNotice(null);
     loadSlots(iso);
   };
 
@@ -165,6 +169,11 @@ export default function BookingForm({
             <DatePicker value={date} min={today} today={today} onChange={changeDate} />
             <h3 className={cx(styles.h4, styles.h4Gap)}>2. Select Time</h3>
             <TimeSlots slots={slots} value={time} onChange={(t) => setTime(t)} loading={slotsPending} />
+            {notice ? (
+              <p className={styles.notice} role="status">
+                {notice}
+              </p>
+            ) : null}
             {slotError ? (
               <p className={styles.error} role="alert">
                 <Icon name="info" size={16} />
@@ -230,9 +239,15 @@ export default function BookingForm({
               note={BOOK.summaryNote}
             />
             <PaymentMethods title="4. Payment Method" name="paymentMethod" value={method} onChange={setMethod} />
-            <Button type="submit" size="lg" icon="lock" arrow fullWidth disabled={!time || submitting}>
+            <Button type="submit" size="lg" icon="lock" arrow fullWidth disabled={!time || submitting} aria-describedby={time ? undefined : 'pay-hint'}>
               {submitting ? BOOK.submittingLabel : `${BOOK.payLabel} ${inr(total)}`}
             </Button>
+            {time ? null : (
+              <p className={styles.payHint} id="pay-hint" role="status">
+                <Icon name="info" size={16} />
+                {BOOK.payHint}
+              </p>
+            )}
             <p className={styles.fine}>{BOOK.paymentNote}</p>
           </div>
         </div>

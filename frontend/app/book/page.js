@@ -9,8 +9,9 @@ import Stepper from '@/components/ui/Stepper';
 import TantricCard from '@/components/ui/TantricCard';
 import { cx } from '@/components/ui/utils';
 import { BOOK } from '@/content/book';
-import { getSettings, getSlots, getTantric, isNotFound, isUnavailable, searchTantrics } from '@/lib/api';
-import { isIsoDate, isTime, languagesLabel, plusLabel, sessionModesLabel, todayIst } from '@/lib/format';
+import { getSettings, getTantric, isNotFound, isUnavailable, searchTantrics } from '@/lib/api';
+import { resolveBookingDay } from '@/lib/availability';
+import { languagesLabel, plusLabel, sessionModesLabel, todayIst } from '@/lib/format';
 import { int, text } from '@/lib/query';
 import page from '@/styles/page.module.css';
 import styles from './page.module.css';
@@ -97,24 +98,18 @@ async function BookingContent({ searchParams }) {
     );
   }
 
-  // The default date and the slots depend on the clock: request-time only.
+  // The default date and the slots depend on the clock: request-time only. The day shown is the first one
+  // with an open time: a day whose times have all passed or been booked would leave nothing to choose and the
+  // Pay button disabled. `notice` explains when that is not the day that was asked for.
   await io();
   const today = todayIst();
-  const requested = text(sp.date, 10);
-  const date =
-    requested && isIsoDate(requested) && requested >= today
-      ? requested
-      : t.availableFrom && t.availableFrom >= today
-        ? t.availableFrom
-        : today;
-  let slots = [];
-  try {
-    ({ slots } = await getSlots(slug, date));
-  } catch {
-    slots = [];
-  }
-  const wanted = text(sp.time, 5);
-  const time = wanted && isTime(wanted) && slots.some((s) => s.time === wanted && s.available) ? wanted : null;
+  const { date, slots, time, notice } = await resolveBookingDay({
+    slug,
+    requested: text(sp.date, 10),
+    wanted: text(sp.time, 5),
+    availableFrom: t.availableFrom,
+    today,
+  });
 
   let settings = {};
   try {
@@ -158,6 +153,7 @@ async function BookingContent({ searchParams }) {
       initialDate={date}
       initialSlots={slots}
       initialTime={time}
+      dateNotice={notice}
       today={today}
       taxPercent={taxPercent}
       infoItems={infoItems}

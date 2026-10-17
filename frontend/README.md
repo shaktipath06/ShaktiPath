@@ -44,7 +44,7 @@ npm run lint
 | `lib/format.js` | IST dates, times, relative dates, mode and language labels, review-count labels |
 | `lib/query.js` | `searchParams` helpers (`first`, `many`, `num`, `pick`) and `hrefWith()` for links that keep the current filters |
 | `styles/shaktipath.css` | Design tokens and component styles (do not restyle components from outside) |
-| `public/images/` | Logos and placeholder photos cropped from the client mockups |
+| `public/images/` | Logos and placeholder photos cropped from the client mockups. The six logo lockups are generated from the client's 1254px master by `node scripts/build-logos.mjs` (native resolution, transparent background, colour 5% darker than the master; `components/ui/Logo.js` holds their pixel sizes) |
 | `app/fonts/` | Inter, Tinos and Tiro Devanagari Hindi (woff2) |
 
 ## Conventions that keep the build green

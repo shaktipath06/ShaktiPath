@@ -37,6 +37,8 @@ export const BOOK = {
   // No payment gateway is connected yet; the button records a pending booking (see the project README).
   paymentNote: 'Secure, encrypted payments. Online payment opens once the payment gateway is connected.',
   payLabel: 'Pay Now',
+  // Under the disabled Pay button until a time slot is chosen (the button depends on the slot, not the text fields).
+  payHint: 'Choose a time under “2. Select Time” to enable payment.',
   submittingLabel: 'Reserving your slot…',
   chooseTimeLabel: 'Choose a time',
   changeServiceLabel: 'Change Service',
